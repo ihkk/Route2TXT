@@ -80,8 +80,11 @@ function App() {
     newText = newText.replace(/\t/g, "");
     newText = newText.replace(/^\s*[\r\n]/gm, "");
 
-    // delete the third line but keep the first line
-    newText = newText.replace(/(.*\n.*\n).+\n/, '$1');
+    // deleter the first three lines
+    newText = newText.replace(/^.+\n.+\n.+\n/, "");
+    // process same stop transfer
+    newText = newText.replace(/(^|\n)(\d{1,2}:\d{2})\n(.+)$\n\d{1,2}:\d{2}/gm, "$1$2\n$3");
+    console.log(newText);
 
     //format
     const lines = newText.trim().split('\n');
@@ -94,13 +97,12 @@ function App() {
         const departure = lines[i + 1] ? lines[i + 1] : '';
         const isTimeFormat = /^\d{1,2}:\d{2}$/.test(lines[i + 2]);
         let mode = isTimeFormat ? '' : (lines[i + 2] ? lines[i + 2] : '');
-        mode = mode.replace(/(.*線)/g, "$1 ").replace(/^(電車)/, "").replace(/^(新幹線)/, "").replace(/徒歩徒歩/g, "").replace(/^(バス)/, "バス：");
-        mode = mode.replace(/(通勤快急|通勤急行|区間特急|快速急行|空港急行|直通特急|通勤特急|新快速|特快速|準特急|各停|急行|快速|特急)/g, "$1 ");
+        mode = mode.replace(/(.*線)/g, "$1 ").replace(/(.*号)/g, "$1 ").replace(/^(電車)/, "").replace(/^(新幹線)/, "").replace(/徒歩徒歩/g, "").replace(/^(バス)/, "バス：");
+        mode = mode.replace(/(通勤快急|通勤急行|区間特急|快速急行|空港急行|直通特急|通勤特急|新快速|特快速|準特急|特急線|各停|急行|快速|特急)/g, "$1 ");
         formattedLines.push(`→${lines[i]}【${departure}】${mode}`);
       }
     }
-    // remove the first line and the last line
-    formattedLines.shift();
+    // remove the last line
     formattedLines.pop();
 
     const formattedText = formattedLines.join('\n');
