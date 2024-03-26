@@ -1,5 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 import React, { useState } from 'react';
 
 function processText(text) {
@@ -11,19 +13,25 @@ function processText(text) {
     dest: {
       name: "",
       address: ""
-    }
+    },
+    cost: 0
   };
 
   const departureMatch = text.match(/出発地: ([^\、]+)、([^]+)/);
   if (departureMatch) {
     result.dept.name = departureMatch[1];
-    result.dept.address = departureMatch[2].split('\n')[0]; // 假设地址和随后的内容由换行符分隔
+    result.dept.address = departureMatch[2].split('\n')[0];
   }
 
   const destinationMatch = text.match(/目的地: ([^\、]+)、([^]+)/);
   if (destinationMatch) {
     result.dest.name = destinationMatch[1];
-    result.dest.address = destinationMatch[2].split('\n')[0]; // 假设地址和随后的内容由换行符分隔
+    result.dest.address = destinationMatch[2].split('\n')[0];
+  }
+
+  const costMatch = text.match(/料金: ([\d,]+)円/);
+  if (costMatch) {
+    result.cost = parseInt(costMatch[1].replace(/,/g, ''));
   }
 
   const addCalendarIndex = text.indexOf("カレンダーに追加");
@@ -59,7 +67,7 @@ function processText(text) {
       const departure = lines[i + 1] ? lines[i + 1] : '';
       const isTimeFormat = /^\d{1,2}:\d{2}$/.test(lines[i + 2]);
       let mode = isTimeFormat ? '' : (lines[i + 2] ? lines[i + 2] : '');
-      mode = mode.replace(/(.*線)/g, "$1 ").replace(/電車/g, "").replace(/徒歩徒歩/g, "").replace(/バス/g, "バス：");
+      mode = mode.replace(/(.*線)/g, "$1 ").replace(/^(電車)/, "").replace(/^(新幹線)/, "").replace(/徒歩徒歩/g, "").replace(/^(バス)/, "バス：");
       mode = mode.replace(/(通勤快急|通勤急行|区間特急|快速急行|空港急行|直通特急|通勤特急|新快速|特快速|準特急|各停|急行|快速|特急)/g, "$1 ");
       formattedLines.push(`→${lines[i]}【${departure}】${mode}`);
     }
@@ -68,16 +76,10 @@ function processText(text) {
   formattedLines.shift();
   formattedLines.pop();
 
-
-
   const formattedText = formattedLines.join('\n');
 
 
-
-  console.log(formattedText);
-
-
-  return JSON.stringify(result, null, 2);
+  return formattedText;
 
 }
 
@@ -90,16 +92,8 @@ function App() {
   const handleInputChange = (event) => {
     const inputText = event.target.value;
     setInputValue(processText(inputText));
-    adjustTextareaHeight(event.target);
-    let outputTextarea = document.getElementById('outputTextarea');
-    adjustTextareaHeight(outputTextarea);
-
   };
 
-  const adjustTextareaHeight = (textarea) => {
-    textarea.style.height = 'auto';
-    textarea.style.height = `${textarea.scrollHeight}px`;
-  };
 
 
 
@@ -116,11 +110,11 @@ function App() {
         <div className='row mt-2'>
           <div className='col-md-6'>
             <label for="inputTextarea">Input</label>
-            <textarea class="form-control textarea-no-scroll" id="inputTextarea" rows="10" onChange={handleInputChange}></textarea>
+            <textarea class="form-control textarea-no-scroll" id="inputTextarea" rows="20" onChange={handleInputChange}></textarea>
           </div>
           <div className='col-md-6'>
             <label for="outputTextarea">Input</label>
-            <textarea class="form-control textarea-no-scroll" id="outputTextarea" rows="10" value={inputValue}></textarea>
+            <textarea class="form-control textarea-no-scroll" id="outputTextarea" rows="20" value={inputValue}></textarea>
           </div>
         </div>
       </div>
