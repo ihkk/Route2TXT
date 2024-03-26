@@ -11,11 +11,43 @@ import React, { useState } from 'react';
 
 function App() {
   const [inputValue, setInputValue] = useState('');
+  const [copySuccess, setCopySuccess] = useState('');
 
   const handleInputChange = (event) => {
     const inputText = event.target.value;
     setInputValue(processText(inputText));
   };
+
+  // copy to clipboard
+  async function copyTextToClipboard(text) {
+    if ('clipboard' in navigator) {
+      try {
+        await navigator.clipboard.writeText(text);
+        setCopySuccess('コピーしました Copied to clipboard');
+        setTimeout(() => setCopySuccess(''), 5000);
+        return true;
+      } catch (error) {
+        console.error('Copying to clipboard failed:', error);
+        return false;
+      }
+    } else {
+      let textArea = document.createElement("textarea");
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        var successful = document.execCommand('copy');
+        return successful;
+      } catch (err) {
+        console.error('Fallback: Copying text command was unsuccessful', err);
+        return false;
+      } finally {
+        document.body.removeChild(textArea);
+      }
+    }
+  }
+
 
 
   const [result, setResult] = useState({
@@ -154,6 +186,15 @@ function App() {
 
     setResult(result);
 
+    // copy to clipboard when it's not empty
+    if (formattedText) {
+      if (copyTextToClipboard(formattedText)) {
+        console.log("copied");
+      } else {
+        console.log("failed");
+      }
+    }
+
     return formattedText;
 
   }
@@ -231,7 +272,8 @@ function App() {
             </div>
           </div>
           <div className='col-md-5'>
-            <label for="outputTextarea" className='form-label'>結果</label>
+            <label for="outputTextarea" className='form-label'>結果</label>      {copySuccess && <span className="copy-success">{copySuccess}</span>}
+
             <textarea class="form-control textarea-no-scroll" id="outputTextarea" rows="15" value={inputValue}></textarea>
           </div>
         </div>
