@@ -81,7 +81,10 @@ function App() {
     else if (lang === "CN") {
       costMatch = text.match(/费用：JP¥([\d,]+)/);
     }
-    result.cost = parseInt(costMatch[1].replace(/,/g, ""));
+    if (costMatch) {
+      result.cost = parseInt(costMatch[1].replace(/,/g, ""));
+    }
+
 
     let addCalendarIndex;
     if (lang === "JP") {
@@ -89,11 +92,13 @@ function App() {
     } else if (lang === "CN") {
       addCalendarIndex = text.indexOf("添加到日历");
     }
+
     let newText = text;
     if (addCalendarIndex !== -1) {
       const nextLineIndex = text.indexOf("\n", addCalendarIndex);
       newText = nextLineIndex !== -1 ? text.substring(nextLineIndex + 1) : "";
     }
+
 
     let ticketInfoIndex;
     if (lang === "JP") {
