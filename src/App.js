@@ -185,7 +185,7 @@ function App() {
         <div className='row mt-2'>
           <div className='col-md-4'>
             <label for="inputTextarea" className='form-label'>入力</label>
-            <textarea class="form-control textarea-no-scroll" id="inputTextarea" rows="20" onChange={handleInputChange}></textarea>
+            <textarea class="form-control textarea-no-scroll" id="inputTextarea" rows="15" onChange={handleInputChange}></textarea>
           </div>
           <div className='col-md-3'>
             <div className='row'>
@@ -232,7 +232,7 @@ function App() {
           </div>
           <div className='col-md-5'>
             <label for="outputTextarea" className='form-label'>結果</label>
-            <textarea class="form-control textarea-no-scroll" id="outputTextarea" rows="20" value={inputValue}></textarea>
+            <textarea class="form-control textarea-no-scroll" id="outputTextarea" rows="15" value={inputValue}></textarea>
           </div>
         </div>
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
