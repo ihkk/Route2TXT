@@ -125,11 +125,23 @@ function App() {
           <a href="." class="d-flex align-items-center me-md-auto text-dark text-decoration-none">
             <span class="fs-4">Route2TXT</span>
           </a>
-          <span class="d-flex align-items-center">Only support 日本語🗾</span>
         </header>
+        {/* warning bar */}
+        <div className='row mt-2'>
+          <div className='col-md-12'>
+            <div className="alert alert-warning" role="alert">
+              本サイトは、日本語のみをサポートしています。This site only supports Japanese.
+            </div>
+            <div className="alert alert-primary" role="alert">
+              <code>Ctrl+A</code>を使用して、Googleマップの公共交通機関の経路ページの全内容をコピーし、「入力」ボックスに貼り付けてください。<br />
+              Use <code>Ctrl+A</code> to copy all content from the Google Maps public transit route page, and paste it into the "入力" box.
+
+            </div>
+          </div>
+        </div>
         <div className='row mt-2'>
           <div className='col-md-4'>
-            <label for="inputTextarea" className='form-label'>輸入</label>
+            <label for="inputTextarea" className='form-label'>入力</label>
             <textarea class="form-control textarea-no-scroll" id="inputTextarea" rows="20" onChange={handleInputChange}></textarea>
           </div>
           <div className='col-md-3'>
