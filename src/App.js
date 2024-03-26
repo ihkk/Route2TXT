@@ -185,7 +185,7 @@ function App() {
         <div className='row mt-2'>
           <div className='col-md-4'>
             <label for="inputTextarea" className='form-label'>入力</label>
-            <textarea class="form-control textarea-no-scroll" id="inputTextarea" rows="15" onChange={handleInputChange}></textarea>
+            <textarea class="form-control textarea-no-scroll" id="inputTextarea" rows="15" onChange={handleInputChange} placeholder="ここにペースト　Paste here"></textarea>
           </div>
           <div className='col-md-3'>
             <div className='row'>
