@@ -1,0 +1,8 @@
+{
+  "short_name": "R2T",
+  "name": "Route2TXT",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
