@@ -80,8 +80,10 @@ function App() {
     newText = newText.replace(/\t/g, "");
     newText = newText.replace(/^\s*[\r\n]/gm, "");
 
-    // deleter the first three lines
+    // delete the first three lines
     newText = newText.replace(/^.+\n.+\n.+\n/, "");
+    // delete the last three line
+    newText = newText.replace(/\n.+\n.+\n.+$/, "");
     // process same stop transfer
     newText = newText.replace(/(^|\n)(\d{1,2}:\d{2})\n(.+)$\n\d{1,2}:\d{2}/gm, "$1$2\n$3");
     console.log(newText);
@@ -102,8 +104,8 @@ function App() {
         formattedLines.push(`→${lines[i]}【${departure}】${mode}`);
       }
     }
-    // remove the last line
-    formattedLines.pop();
+    // // remove the last line
+    // formattedLines.pop();
 
     const formattedText = formattedLines.join('\n');
 
