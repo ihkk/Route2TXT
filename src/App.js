@@ -119,14 +119,15 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <header class="d-flex flex-wrap justify-content-center py-3 border-bottom">
+        <header class="d-flex flex-wrap justify-content-left py-3 border-bottom">
           <a href="." class="d-flex align-items-center me-md-auto text-dark text-decoration-none">
             <span class="fs-4">Route2TXT</span>
           </a>
+          <span class="d-flex align-items-center">Only support 日本語🗾</span>
         </header>
         <div className='row mt-2'>
           <div className='col-md-4'>
-            <label for="inputTextarea" className='form-label'>Input</label>
+            <label for="inputTextarea" className='form-label'>輸入</label>
             <textarea class="form-control textarea-no-scroll" id="inputTextarea" rows="20" onChange={handleInputChange}></textarea>
           </div>
           <div className='col-md-3'>
@@ -173,10 +174,33 @@ function App() {
             </div>
           </div>
           <div className='col-md-5'>
-            <label for="outputTextarea" className='form-label'>Result</label>
+            <label for="outputTextarea" className='form-label'>結果</label>
             <textarea class="form-control textarea-no-scroll" id="outputTextarea" rows="20" value={inputValue}></textarea>
           </div>
         </div>
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+          <div class="col-9 d-flex align-items-center">
+            <span class="mb-md-0 text-muted">
+              ©
+              <a href="https://github.com/ihkk" class="link text-muted" target="_blank" style={{ textDecoration: "none" }}>Jacky HE</a>            </span>
+          </div>
+
+          <ul class="nav col-3 justify-content-end list-unstyled d-flex">
+
+            <li class="ms-3">
+              <a className="text-muted" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans">
+                <i class="bi bi-cc-circle-fill"></i>
+              </a>
+            </li>
+
+            <li class="ms-1">
+              <a className="text-muted" target="_blank" href="https://github.com/ihkk/Route2TXT">
+                <i class="bi bi-github"></i>
+              </a>
+            </li>
+
+          </ul>
+        </footer>
       </div>
     </div>
   );
