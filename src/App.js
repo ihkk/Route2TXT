@@ -79,14 +79,14 @@ function App() {
     newText = newText.replace(/^\s*$/gm, "");
     newText = newText.replace(/\t/g, "");
     newText = newText.replace(/^\s*[\r\n]/gm, "");
+    console.log(newText);
 
     // delete the first three lines
     newText = newText.replace(/^.+\n.+\n.+\n/, "");
-    // delete the last three line
-    newText = newText.replace(/\n.+\n.+\n.+$/, "");
+    // delete the last four line
+    newText = newText.replace(/\n.+\n.+\n.+\n.+$/, "");
     // process same stop transfer
     newText = newText.replace(/(^|\n)(\d{1,2}:\d{2})\n(.+)$\n\d{1,2}:\d{2}/gm, "$1$2\n$3");
-    console.log(newText);
 
     //format
     const lines = newText.trim().split('\n');
