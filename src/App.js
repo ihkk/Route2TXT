@@ -95,7 +95,12 @@ function App() {
       newText = nextLineIndex !== -1 ? text.substring(nextLineIndex + 1) : "";
     }
 
-    const ticketInfoIndex = newText.indexOf("切符などの情報");
+    let ticketInfoIndex;
+    if (lang === "JP") {
+      ticketInfoIndex = newText.indexOf("切符などの情報");
+    } else if (lang === "CN") {
+      ticketInfoIndex = newText.indexOf("票务信息");
+    }
 
     if (ticketInfoIndex !== -1) {
       newText = newText.substring(0, ticketInfoIndex).trim();
