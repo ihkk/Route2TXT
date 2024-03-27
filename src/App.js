@@ -162,8 +162,12 @@ function App() {
     const formattedLines = [];
 
     const timeRegex = /^\d{1,2}:\d{2}$/;
-
+    const twoTimeRegex = /^(\d{2}:\d{2})(\d{2}:\d{2})$/;
     for (let i = 0; i < lines.length; i++) {
+      // real time: HH:MMHH:MM in one line to HH:MM (only take the second time)
+      if (lines[i].match(twoTimeRegex)) {
+        lines[i] = lines[i].replace(twoTimeRegex, "$2");
+      }
       if (timeRegex.test(lines[i])) {
         const departure = lines[i + 1] ? lines[i + 1] : '';
         const isTimeFormat = /^\d{1,2}:\d{2}$/.test(lines[i + 2]);
