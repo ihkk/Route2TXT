@@ -176,7 +176,7 @@ function App() {
           mode = mode.replace(/(.*線)/g, "$1 ").replace(/^(ライン)/, "").replace(/(.*号)/g, "$1 ").replace(/^(電車)/, "").replace(/^(地下鉄)/, "").replace(/^(新幹線)/, "").replace(/徒歩徒歩/g, "").replace(/^(バス)/, "バス：").replace(/^(フェリー)/, "フェリー：");
           mode = mode.replace(/(通勤快急|通勤急行|区間特急|快速急行|空港急行|直通特急|通勤特急|新快速|特快速|準特急|特急線|快特|各停|急行|普通|快速|特急)/g, "$1 ");
         } else if (lang === "CN") {
-          mode = mode.replace(/(.*线)/g, "$1 ").replace(/(.*Line)/g, "$1 ").replace(/(.*線)/g, "$1 ").replace(/^(地铁)/, "").replace(/(.*号)/g, "$1 ").replace(/^(火车)/, "").replace(/^(新干线)/, "").replace(/步行步行/g, "").replace(/^(公交)/, "公交：").replace(/^(轮渡)/, "轮渡");
+          mode = mode.replace(/(.*线)/g, "$1 ").replace(/(.*Line)/g, "$1 ").replace(/(.*線)/g, "$1 ").replace(/^(地铁)/, "").replace(/(.*号)/g, "$1 ").replace(/^(火车)/, "").replace(/^(新干线)/, "").replace(/步行步行/g, "").replace(/^(公交)/, "公交：").replace(/^(轮渡)/, "轮渡：");
           mode = mode.replace(/(通勤快急|通勤急行|区間特急|快速急行|空港急行|直通特急|通勤特急|新快速|特快速|准特急|特急线|各站停车|各停|快特|普通|急行|快速|特急)/g, "$1 ");
 
         }
