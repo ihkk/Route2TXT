@@ -23,7 +23,7 @@ function App() {
     if ('clipboard' in navigator) {
       try {
         await navigator.clipboard.writeText(text);
-        setCopySuccess('コピーしました Copied to clipboard');
+        setCopySuccess('コピーしました Copied to the clipboard');
         setTimeout(() => setCopySuccess(''), 5000);
         return true;
       } catch (error) {
