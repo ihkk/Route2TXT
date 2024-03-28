@@ -2,7 +2,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 
@@ -17,6 +17,11 @@ function App() {
     const inputText = event.target.value;
     setInputValue(processText(inputText));
   };
+
+  // focus on the input textarea when the page is loaded
+  useEffect(() => {
+    document.getElementById("inputTextarea").focus();
+  }, []);
 
   // copy to clipboard
   async function copyTextToClipboard(text) {
@@ -316,6 +321,7 @@ function App() {
               id="outputTextarea"
               rows="15"
               value={inputValue}
+              onClick={copyTextToClipboard.bind(this, inputValue)}
               disabled={inputValue === ""}>
             </textarea>
           </div>
