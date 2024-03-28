@@ -142,12 +142,16 @@ function App() {
     if (ticketInfoIndex !== -1) {
       newText = newText.substring(0, ticketInfoIndex).trim();
     }
+    // delete lines starting with "徒歩"
+    newText = newText.replace(/^(徒歩.*)$/gm, "徒歩徒歩");
+    newText = newText.replace(/^(步行.*)$/gm, "步行步行");
 
     // delete empty lines
     newText = newText.replace(/^[\s	]*$/gm, "");
     newText = newText.replace(/^\s*$/gm, "");
     newText = newText.replace(/\t/g, "");
     newText = newText.replace(/^\s*[\r\n]/gm, "");
+
 
     // delete the first three lines
     newText = newText.replace(/^.+\n.+\n.+\n/, "");
@@ -272,6 +276,7 @@ function App() {
                     id="deptName"
                     name="deptName"
                     value={result.dept.name}
+                    disabled={result.dept.name === ""}
                   />
                 </div>
                 <div className="mb-3">
@@ -284,6 +289,7 @@ function App() {
                     id="destName"
                     name="destName"
                     value={result.dest.name}
+                    disabled={result.dest.name === ""}
                   />
                 </div>
                 <div className="mb-3">
@@ -296,6 +302,7 @@ function App() {
                     id="cost"
                     name="cost"
                     value={result.cost}
+                    disabled={result.cost === 0}
                   />
                 </div>
               </form>
@@ -304,8 +311,13 @@ function App() {
           </div>
           <div className='col-md-5'>
             <label for="outputTextarea" className='form-label'>結果</label>      {copySuccess && <span className="copy-success">{copySuccess}</span>}
-
-            <textarea class="form-control textarea-no-scroll" id="outputTextarea" rows="15" value={inputValue}></textarea>
+            <textarea
+              class="form-control textarea-no-scroll"
+              id="outputTextarea"
+              rows="15"
+              value={inputValue}
+              disabled={inputValue === ""}>
+            </textarea>
           </div>
         </div>
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
