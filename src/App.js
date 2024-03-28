@@ -28,6 +28,7 @@ function App() {
     if ('clipboard' in navigator) {
       try {
         await navigator.clipboard.writeText(text);
+        console.log('copied');
         setCopySuccess('コピーしました Copied to the clipboard');
         setTimeout(() => setCopySuccess(''), 5000);
         return true;
@@ -43,6 +44,7 @@ function App() {
       textArea.select();
       try {
         var successful = document.execCommand('copy');
+        console.log('copied');
         return successful;
       } catch (err) {
         console.error('Fallback: Copying text command was unsuccessful', err);
@@ -169,7 +171,6 @@ function App() {
     // process same stop transfer
     newText = newText.replace(/(^|\n)(\d{1,2}:\d{2})\n(.+)$\n\d{1,2}:\d{2}/gm, "$1$2\n$3");
 
-    console.log(newText);
 
     //format
     const lines = newText.trim().split('\n');
@@ -177,6 +178,9 @@ function App() {
 
     const timeRegex = /^\d{1,2}:\d{2}$/;
     const twoTimeRegex = /^(\d{2}:\d{2})(\d{2}:\d{2})$/;
+
+    console.log(newText);
+
     let platformRegex;
     if (lang === "JP") {
       platformRegex = /([\d+\/]*)\s*番ホーム/;
@@ -229,7 +233,7 @@ function App() {
     // copy to clipboard when it's not empty
     if (formattedText) {
       if (copyTextToClipboard(formattedText)) {
-        console.log("copied");
+        console.log("auto copied");
       } else {
         console.log("failed");
       }
