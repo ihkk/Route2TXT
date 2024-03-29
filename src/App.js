@@ -92,9 +92,9 @@ function App() {
 
     let departureMatch;
     if (lang === "JP") {
-      departureMatch = text.match(/出発地: ([^\、]+)、([^]+)/);
+      departureMatch = text.match(/出発地: ([^\、]+)、([^]+)$/);
     } else if (lang === "CN") {
-      departureMatch = text.match(/从(.*)/);
+      departureMatch = text.match(/从(.*)$/);
     }
     if (departureMatch) {
       result.dept.name = departureMatch[1];
@@ -103,10 +103,10 @@ function App() {
     let destinationMatch;
 
     if (lang === "JP") {
-      destinationMatch = text.match(/目的地: ([^\、]+)、([^]+)/);
+      destinationMatch = text.match(/目的地: ([^\、]+)、([^]+)$/);
     }
     else if (lang === "CN") {
-      destinationMatch = text.match(/到(.*)/);
+      destinationMatch = text.match(/到(.*)$/);
     }
 
     if (destinationMatch) {
