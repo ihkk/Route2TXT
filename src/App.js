@@ -249,11 +249,16 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <header class="d-flex flex-wrap justify-content-left py-3 border-bottom">
-          <a href="." class="d-flex align-items-center me-md-auto text-dark text-decoration-none">
+        <header class="d-flex flex-wrap justify-content-between align-items-center py-3 border-bottom">
+          <a href="." class="d-flex align-items-center text-dark text-decoration-none">
             <span class="fs-4">Route2TXT</span>
           </a>
+          <div class="ms-auto">
+            {copySuccess && <span class="copy-success">{copySuccess}</span>}
+          </div>
         </header>
+
+
         {/* warning bar */}
         <div className='row mt-2'>
           <div className='col-md-12'>
@@ -286,6 +291,7 @@ function App() {
                     name="deptName"
                     value={result.dept.name}
                     disabled={result.dept.name === ""}
+                    onClick={copyTextToClipboard.bind(this, result.dept.name)}
                   />
                 </div>
                 <div className="mb-3">
@@ -299,6 +305,21 @@ function App() {
                     name="destName"
                     value={result.dest.name}
                     disabled={result.dest.name === ""}
+                    onClick={copyTextToClipboard.bind(this, result.dest.name)}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="cost" className="form-label">
+                    <i class="bi bi-arrow-left-right"></i> ルート
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="route"
+                    name="route"
+                    value={result.dept.name + '-' + result.dest.name}
+                    disabled={result.dept.name === "" && result.dest.name === ""}
+                    onClick={copyTextToClipboard.bind(this, result.dept.name + '-' + result.dest.name)}
                   />
                 </div>
                 <div className="mb-3">
@@ -312,6 +333,7 @@ function App() {
                     name="cost"
                     value={result.cost}
                     disabled={result.cost === 0}
+                    onClick={copyTextToClipboard.bind(this, result.cost)}
                   />
                 </div>
               </form>
@@ -319,7 +341,7 @@ function App() {
             </div>
           </div>
           <div className='col-md-5'>
-            <label for="outputTextarea" className='form-label'><i class="bi bi-sign-turn-right-fill"></i> 経路</label>      {copySuccess && <span className="copy-success">{copySuccess}</span>}
+            <label for="outputTextarea" className='form-label'><i class="bi bi-sign-turn-right-fill"></i> 経路</label>
             <textarea
               class="form-control textarea-no-scroll"
               id="outputTextarea"
