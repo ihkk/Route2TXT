@@ -227,7 +227,10 @@ function App() {
     // // remove the last line
     // formattedLines.pop();
 
-    const formattedText = formattedLines.join('\n');
+    // clean the whole lines which contains `【】`
+    const cleanLines = formattedLines.filter(line => line.indexOf('【】') === -1);
+
+    const formattedText = cleanLines.join('\n');
 
     setResult(result);
 
