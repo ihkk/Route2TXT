@@ -251,8 +251,10 @@ function App() {
   function onClearTime() {
     const text = inputValue;
     const cleanedText = text.replace(/\d{1,2}:\d{2}/g, "");
-    console.log(cleanedText);
     setInputValue(cleanedText);
+    // give feedback
+    setCopySuccess('時刻を削除しました Removed time stamps');
+    setTimeout(() => setCopySuccess(''), 5000);
   }
 
 
@@ -357,7 +359,7 @@ function App() {
                   onClick={() => onClearTime()}
                   disabled={inputValue === ""}
                 >
-                  <i className="bi bi-clock-history"></i> 時点抜き/Remove Time
+                  <i className="bi bi-clock-history"></i> 時刻抜き/Remove Time
                 </button>
               </div>
             </div>
