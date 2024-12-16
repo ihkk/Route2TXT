@@ -247,6 +247,13 @@ function App() {
 
   }
 
+  // function to remove time stamps from the text
+  function onClearTime() {
+    const text = inputValue;
+    const cleanedText = text.replace(/\d{1,2}:\d{2}/g, "");
+    console.log(cleanedText);
+    setInputValue(cleanedText);
+  }
 
 
 
@@ -341,7 +348,18 @@ function App() {
                   />
                 </div>
               </form>
-
+            </div>
+            <div className='row'>
+              <div className='col-md-12'>
+                {/* clear time */}
+                <button
+                  className="btn btn-warning"
+                  onClick={() => onClearTime()}
+                  disabled={inputValue === ""}
+                >
+                  <i className="bi bi-clock-history"></i> 時点抜き/Remove Time
+                </button>
+              </div>
             </div>
           </div>
           <div className='col-md-5'>
