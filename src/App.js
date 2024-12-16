@@ -285,12 +285,12 @@ function App() {
             </div>
           </div>
         </div>
-        <div className='row mt-2'>
-          <div className='col-md-4'>
+        <div className='row mt-2 mb-2'>
+          <div className='col-md-4 mb-2'>
             <label for="inputTextarea" className='form-label'><i class="bi bi-clipboard2-fill"></i> 入力</label>
             <textarea class="form-control textarea-no-scroll" id="inputTextarea" rows="15" onChange={handleInputChange} placeholder="ここにペースト　Paste here"></textarea>
           </div>
-          <div className='col-md-3'>
+          <div className='col-md-3 mb-2'>
             <div className='row'>
               <form>
                 <div className="mb-3">
@@ -364,7 +364,7 @@ function App() {
               </div>
             </div>
           </div>
-          <div className='col-md-5'>
+          <div className='col-md-5 mb-2'>
             <label for="outputTextarea" className='form-label'><i class="bi bi-sign-turn-right-fill"></i> 経路</label>
             <textarea
               class="form-control textarea-no-scroll"
