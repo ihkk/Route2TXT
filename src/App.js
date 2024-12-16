@@ -257,6 +257,33 @@ function App() {
     setTimeout(() => setCopySuccess(''), 5000);
   }
 
+  useEffect(() => {
+    // monitor messages from the parent window
+    const handleMessage = (event) => {
+      // check the origin of the message
+      // if origin contains google 
+      if (event.origin.includes("google")) {
+        const message = event.data; // 获取消息内容
+        if (typeof message === "string") {
+          console.log("Received message:", message);
+          setInputValue(processText(message));
+          setTimeout(() => setCopySuccess(''), 5000);
+        }
+      } else {
+        console.warn("Unauthorized message origin:", event.origin);
+      }
+    };
+
+    // add event listener
+    window.addEventListener("message", handleMessage);
+
+    // remove event listener
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
+  }, []);
+
+
 
 
   return (
