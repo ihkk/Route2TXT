@@ -351,7 +351,7 @@ function App() {
                 </div>
               </form>
             </div>
-            <div className='row'>
+            <div className='row mt-2 mb-2'>
               <div className='col-md-12'>
                 {/* clear time */}
                 <button
@@ -360,6 +360,18 @@ function App() {
                   disabled={inputValue === ""}
                 >
                   <i className="bi bi-clock-history"></i> 時刻抜き/Remove Time
+                </button>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-md-12 mt-2 mb-2'>
+                {/* clear time */}
+                <button
+                  className="btn btn-primary"
+                  onClick={() => copyTextToClipboard(result.dept.name + '-' + result.dest.name + "\t\"" + inputValue + "\"\t\t" + result.cost)}
+                  disabled={inputValue === ""}
+                >
+                  <i className="bi bi-table"></i> 表でコピー/Copy as Table
                 </button>
               </div>
             </div>
