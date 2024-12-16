@@ -264,7 +264,7 @@ function App() {
       <div className="container">
         <header class="d-flex flex-wrap justify-content-between align-items-center py-3 border-bottom">
           <a href="." class="d-flex align-items-center text-dark text-decoration-none">
-            <span class="fs-4">Route2TXT</span>
+            <span class="fs-4">Route2TXT：より見やすい経路 More Readable Routes</span>
           </a>
           <div class="ms-auto">
             {copySuccess && <span class="copy-success">{copySuccess}</span>}
@@ -359,7 +359,7 @@ function App() {
                   onClick={() => onClearTime()}
                   disabled={inputValue === ""}
                 >
-                  <i className="bi bi-clock-history"></i> 時刻抜き/Remove Time
+                  <i className="bi bi-clock-history"></i> 時刻抜き Remove Time
                 </button>
               </div>
             </div>
@@ -371,7 +371,7 @@ function App() {
                   onClick={() => copyTextToClipboard(result.dept.name + '-' + result.dest.name + "\t\"" + inputValue + "\"\t\t" + result.cost)}
                   disabled={inputValue === ""}
                 >
-                  <i className="bi bi-table"></i> 表でコピー/Copy as Table
+                  <i className="bi bi-table"></i> 表でコピー Copy as Table
                 </button>
               </div>
             </div>
