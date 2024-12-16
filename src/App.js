@@ -276,7 +276,7 @@ function App() {
         <div className='row mt-2'>
           <div className='col-md-12'>
             <div className="alert alert-warning" role="alert">
-              本サイトは、日本語と中国語のみをサポートしています。This site only supports Japanese and Chinese.
+              本サイトは、日本語と中国語のみをサポートしています。This site only supports Japanese and Chinese inputs.
             </div>
             <div className="alert alert-primary" role="alert">
               <code>Ctrl+A</code>を使用して、Googleマップの公共交通機関の経路ページの全内容をコピーし、「入力」ボックスに貼り付けてください。<br />
