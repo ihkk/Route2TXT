@@ -426,7 +426,7 @@ function App() {
 
 
             <li class="ms-3">
-              <a className="text-muted" target="_blank" href="https://www.tampermonkey.net/script_installation.php#url=https://r2t.h0.work/R2T%20Add-on.user.js">
+              <a className="text-muted" target="_blank" href="https://www.tampermonkey.net/script_installation.php#url=https://update.greasyfork.org/scripts/520891/R2T%20Add-on.user.js">
                 <i class="bi bi-plugin"></i>
               </a>
             </li>
