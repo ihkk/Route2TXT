@@ -90,11 +90,14 @@ function App() {
       lang = "CN";
     }
 
+    // record start and end time
+    let startTime;
+    let endTime;
+
 
     let departureMatch;
     if (lang === "JP") {
       departureMatch = text.match(/出発地: ([^、\,\n]+)([^\n]+)/);
-      console.log(departureMatch);
     } else if (lang === "CN") {
       departureMatch = text.match(/从([^, ]*)/);
     }
@@ -195,6 +198,11 @@ function App() {
         lines[i] = lines[i].replace(twoTimeRegex, "$2");
       }
       if (timeRegex.test(lines[i])) {
+        // update the start and end time
+        if (!startTime) {
+          startTime = lines[i];
+        }
+        endTime = lines[i];
         const departure = lines[i + 1] ? lines[i + 1] : '';
         const isTimeFormat = /^\d{1,2}:\d{2}$/.test(lines[i + 2]);
         let mode = isTimeFormat ? '' : (lines[i + 2] ? lines[i + 2] : '');
