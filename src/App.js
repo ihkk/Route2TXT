@@ -70,7 +70,7 @@ function App() {
 
   function fullToHalf(str) {
     return str.replace(/[！-～]/g, function (s) {
-      return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+      return s === '（' || s === '）' ? s : String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
     });
   }
 
