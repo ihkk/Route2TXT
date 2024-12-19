@@ -205,6 +205,24 @@ function App() {
           mode = mode.replace(/(.*线)/g, "$1 ").replace(/(.*Line)/g, "$1 ").replace(/(.*線)/g, "$1 ").replace(/^(地铁)/, "").replace(/^(路面电车)/, "").replace(/(.*号)/g, "$1 ").replace(/^(火车)/, "").replace(/^(新干线)/, "").replace(/步行步行/g, "").replace(/^(公交)/, "公交：").replace(/^(轮渡)/, "轮渡：");
           mode = mode.replace(/(通勤快急|通勤急行|区間特急|快速急行|空港急行|直通特急|通勤特急|新快速|特快速|准特急|特急线|各站停车|卧铺|各停|快特|普通|急行|快速|特急)/g, "$1 ");
         }
+        console.log(mode);
+
+        // check tokkyu duplicated names
+        for (let i = 1; i <= 10; i++) {
+          if (mode.slice(0, i) === mode.slice(i, 2 * i)) {
+            mode = mode.slice(i);
+            break;
+          }
+        }
+
+        // check specific pattern for shinkansen
+        mode = mode.replace(/(新幹線|新干線)\s+(\S+\d+号)\s+(\S+)/g, (match, p1, p2, p3) => {
+          const p2Prefix = p2.replace(/\d+号$/, ''); // Remove trailing digits and "号" from p2
+          const p3Prefix = p3.slice(0, p2Prefix.length); // Compare the prefix of p3 with cleaned p2
+          const p3Remaining = p3.slice(p2Prefix.length); // Keep the remaining part of p3
+          return p2Prefix === p3Prefix ? `${p1} ${p2} ${p3Remaining}`.trim() : match;
+        });
+
 
         // check platform for the i+5 line
         if (platformRegex.test(lines[i + 5])) {
