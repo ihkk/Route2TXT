@@ -265,7 +265,10 @@ function App() {
     // formattedLines.pop();
 
     // clean the whole lines which contains `【】`
-    const cleanLines = formattedLines.filter(line => line.indexOf('【】') === -1);
+    let cleanLines = formattedLines.filter(line => line.indexOf('【】') === -1);
+
+    // clean all lines with 【time】 in some case of delays
+    cleanLines = cleanLines.filter(line => !/【\d{1,2}:\d{2}】/.test(line));
 
     const formattedText = cleanLines.join('\n');
 
