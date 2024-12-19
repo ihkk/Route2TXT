@@ -60,26 +60,34 @@ function App() {
   const [result, setResult] = useState({
     dept: {
       name: "",
-      address: ""
+      address: "",
+      time: "",
+      station: ""
     },
     dest: {
       name: "",
-      address: ""
+      address: "",
+      time: "",
+      station: ""
     },
-    cost: 0
+    cost: 0,
   });
 
   function processText(text) {
     const result = {
       dept: {
         name: "",
-        address: ""
+        address: "",
+        time: "",
+        station: ""
       },
       dest: {
         name: "",
-        address: ""
+        address: "",
+        time: "",
+        station: ""
       },
-      cost: 0
+      cost: 0,
     };
 
     // check language: if there's "出発地" then JP, if there's "已保存" then CN
@@ -89,11 +97,6 @@ function App() {
     } else if (text.indexOf("图层") !== -1) {
       lang = "CN";
     }
-
-    // record start and end time
-    let startTime;
-    let endTime;
-
 
     let departureMatch;
     if (lang === "JP") {
@@ -199,10 +202,10 @@ function App() {
       }
       if (timeRegex.test(lines[i])) {
         // update the start and end time
-        if (!startTime) {
-          startTime = lines[i];
+        if (!result.dept.time) {
+          result.dept.time = lines[i];
         }
-        endTime = lines[i];
+        result.dest.time = lines[i];
         const departure = lines[i + 1] ? lines[i + 1] : '';
         const isTimeFormat = /^\d{1,2}:\d{2}$/.test(lines[i + 2]);
         let mode = isTimeFormat ? '' : (lines[i + 2] ? lines[i + 2] : '');
@@ -247,6 +250,11 @@ function App() {
           }
         }
         formattedLines.push(`→${lines[i]}【${departure}】${mode}`);
+        // update the start and end station
+        if (!result.dept.station) {
+          result.dept.station = departure;
+        }
+        result.dest.station = departure;
       }
     }
     // // remove the last line
@@ -420,7 +428,7 @@ function App() {
                 {/* clear time */}
                 <button
                   className="btn btn-primary"
-                  onClick={() => copyTextToClipboard(result.dept.name + '-' + result.dest.name + "\t\"" + inputValue + "\"\t\t" + result.cost)}
+                  onClick={() => copyTextToClipboard(result.dept.time + "-" + result.dest.time + "\t" + result.dept.station + '-' + result.dest.station + "\t\"" + inputValue + "\"\t\t" + result.cost)}
                   disabled={inputValue === ""}
                 >
                   <i className="bi bi-table"></i> 表でコピー Copy as Table
@@ -471,7 +479,7 @@ function App() {
           </ul>
         </footer>
       </div>
-    </div>
+    </div >
   );
 }
 
