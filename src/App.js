@@ -68,6 +68,12 @@ function App() {
     cost: 0,
   });
 
+  function fullToHalf(str) {
+    return str.replace(/[！-～]/g, function (s) {
+      return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+    });
+  }
+
   function processText(text) {
     const result = {
       dept: {
@@ -87,6 +93,9 @@ function App() {
 
     // check language: if there's "出発地" then JP, if there's "已保存" then CN
     let lang;
+
+    text = fullToHalf(text);
+
     if (text.indexOf("出発地") !== -1) {
       lang = "JP";
     } else if (text.indexOf("图层") !== -1) {
