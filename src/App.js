@@ -102,6 +102,29 @@ function App() {
       lang = "CN";
     }
 
+    console.log("Detected language:", lang);
+
+    // remove purchasable ticket card block and override cost if needed
+    if (lang === "JP") {
+      const ticketCardRegex = /切符を購入する[\s\S]*?([\d,]+)円\s*(?:より|起)[\s\S]*?(?=\n\d{1,2}:\d{2}|\n|\nカレンダーに追加|$)/;
+      const ticketCardMatch = text.match(ticketCardRegex);
+
+      if (ticketCardMatch) {
+        result.cost = parseInt(ticketCardMatch[1].replace(/,/g, ""));
+        text = text.replace(ticketCardRegex, "\n");
+      }
+    } else if (lang === "CN") {
+      const ticketCardRegex = /购票[\s\S]*?JP¥\s*([\d,]+)\s*起[\s\S]*?(?=\n\d{1,2}:\d{2}|\n添加到日历|$)/;
+      const ticketCardMatch = text.match(ticketCardRegex);
+
+      if (ticketCardMatch) {
+        result.cost = parseInt(ticketCardMatch[1].replace(/,/g, ""));
+        text = text.replace(ticketCardRegex, "\n");
+      }
+    }
+
+
+
     let departureMatch;
     if (lang === "JP") {
       departureMatch = text.match(/出発地: ([^、\,\n]+)([^\n]+)/);
@@ -132,24 +155,20 @@ function App() {
     else if (lang === "CN") {
       costMatch = text.match(/费用：JP¥([\d,]+)/);
     }
-    if (costMatch) {
+    if (costMatch && result.cost === 0) {
       result.cost = parseInt(costMatch[1].replace(/,/g, ""));
     }
 
 
-    let addCalendarIndex;
-    if (lang === "JP") {
-      addCalendarIndex = text.indexOf("カレンダーに追加");
-    } else if (lang === "CN") {
-      addCalendarIndex = text.indexOf("添加到日历");
-    }
-
     let newText = text;
-    if (addCalendarIndex !== -1) {
-      const nextLineIndex = text.indexOf("\n", addCalendarIndex);
-      newText = nextLineIndex !== -1 ? text.substring(nextLineIndex + 1) : "";
-    }
 
+    // find the first real route time block, e.g. "\n13:20\n東京駅"
+    const routeStartMatch = text.match(/\n(\d{1,2}:\d{2})\s*\n[^\n]+\n/);
+
+    if (routeStartMatch) {
+      const routeStartIndex = routeStartMatch.index + 1; // skip leading \n
+      newText = text.substring(routeStartIndex);
+    }
 
     let ticketInfoIndex;
     if (lang === "JP") {
