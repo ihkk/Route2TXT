@@ -216,7 +216,7 @@ function App() {
     if (lang === "JP") {
       platformRegex = /([\d+\/]*)\s*番ホーム/;
     } else if (lang === "CN") {
-      platformRegex = /第([\d+\/]*)\s*站台/;
+      platformRegex = /第\s*([\d+/]+)\s*站台/;
     }
     for (let i = 0; i < lines.length; i++) {
       // real time: HH:MMHH:MM in one line to HH:MM (only take the second time)
